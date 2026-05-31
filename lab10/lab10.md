@@ -43,42 +43,63 @@ Windows) или UDP-сегмент (в случае с Unix).
 1. Выберите первое ICMP-сообщение эхо-запроса, отправленное вашим компьютером, и
    раскройте часть информации о пакете Internet Protocol в окне подробной информации.
    Каков IP-адрес вашего компьютера?
-   - <!-- todo -->
+   - 192.168.0.205
+     <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/ad7fa68f-63bf-4ebd-a625-b16898e892f4" />
+
 2. Найдите заголовок IP-пакета. Какое значение указано здесь в поле протокола верхнего уровня?
-   - <!-- todo -->
+   - 1
+     <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/d3fc6ddd-f283-45e3-9f93-c07d5086ad8f" />
+
 3. Сколько байт в IP-заголовке? Сколько байт приходится на полезную нагрузку IP-дейтаграммы?
-   - <!-- todo -->
-   - <!-- todo -->
+   - 20 в заголовке
+   - 56 тотал длина, 20 из них заголовок, значит полезных 36
+     <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/1cb5f1a0-c893-4414-9448-bbb9058462bc" />
+
 4. Отсортируйте отслеженные пакеты по их исходному IP-адресу; для этого щелкните по
    заголовку столбца Source. Выберите первое сообщение эхо-запроса, отосланное
    вашим компьютером по протоколу ICMP, и раскройте раздел Internet Protocol.
    1. Какие поля IP-дейтаграммы всегда изменяются от одной дейтаграммы к
       следующей в рамках одной последовательности ICMP-сообщений, отсылаемых
       компьютером (последовательность – это все сообщения, которые отправляются до конечного хоста)?
-      - <!-- todo -->
+      - identification, checksum, time to live
+        <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/b2198118-11a4-458a-b30b-bca20bedca77" />
+
+        <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/77d6d9a2-d62f-4c44-a050-dcf12989a8d3" />
+
    2. Какие поля не меняются? Какие поля должны оставаться неизменными? Какие
       поля должны изменяться? (в рамках одного запуска утилиты)
-      - <!-- todo -->
-      - <!-- todo -->
-      - <!-- todo -->
+      - source, destination, protocol, total length
+      - source, destination, protocol
+      - ttl должен меняться, checksum тоже
    3. Как изменяется значение поля Identification IP-дейтаграммы с каждым
       последующим эхо-запросом? Есть ли какая-либо закономерность?
-      - <!-- todo -->
-      - <!-- todo -->
+      - 0x1410 -> 0x1411 -> 0x1412 -> ...
+      - растет на 1 каждый раз
+        <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/c413650b-6e86-4312-ae67-3b49e8187f1d" />
+        <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/ad3b49e8-bd6b-41f3-ad65-785554be3dc2" />
+        <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/7aad572f-056e-4966-9a0a-8f0f63db3d3d" />
+
+  
+    
 5. Какое значение содержится в поле Identification (Идентификация), а какое – в поле TTL
    (выберите какой-либо один пакет ICMP)?
-   - <!-- todo -->
-   - <!-- todo -->
+   - identification: 0x1443 (5187)
+   - TTL: 18
+     <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/9db6b68d-4556-4d64-8ec2-ca4553723125" />
+
 6. Остаются ли эти значения (Identification и TTL) неизменными во всех сообщениях
    протокола ICMP, где содержится информация об истечении предписанного времени
    жизни; рассмотрите только те из таких сообщений, которые поступили на компьютер с
    ближайшего (первого транзитного) маршрутизатора.
-   - <!-- todo -->
+   - TTL не меняеся, identification меняется на 1 (выше тоже это уже было)
 7. Найдите серии откликов ICMP, в которых содержатся сообщения об истечении
    предписанного времени жизни (time-to-live exceeded). Выберите один из пакетов.
    Какое значение содержится в поле Identification (Идентификация), а какое – в поле TTL?
-   - <!-- todo -->
-   - <!-- todo -->
+   - identification 0x0000
+   - TTL 252
+    <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/ca28b50b-3b15-429e-9217-6ffc583b930d" />
+
+     
 8. **Фрагментация**. Остановите захват пакетов в Wireshark. Измените размер пакета
    Packet Size = 3500 байт. Снова запустите захват пакетов в Wireshark и перезапустите
    трассировку. (Для Unix заново запустите traceroute с длиной пакета 3500 байт).
@@ -86,9 +107,18 @@ Windows) или UDP-сегмент (в случае с Unix).
    компьютер (с уже измененным размером пакета).
    1. Было ли это сообщение фрагментировано между двумя или более IP-дейтаграммами? 
       Если да, то сколько фрагментов было создано?
-      - <!-- todo -->
+      - исходящее фрагментировано на 3 части, ответы не фрагментируются
+        <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/69e00f74-95be-4325-a9a6-0842bf1daf5d" />
+        <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/60c0c313-0dfb-490e-ae82-6db6398cbc2b" />
+
+
+
    2. Какие поля IP-заголовка изменяются в разных фрагментах?
-      - <!-- todo -->
+      - fragment offset, checksum, total length (у первых двух частей 1500, у последней 540), у первых двух еще есть поле more fragments:
+      <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/d7ed6722-07d2-4ce3-a223-10b1a06a9b10" />
+      <img width="1722" height="608" alt="изображение" src="https://github.com/user-attachments/assets/782150b0-bafa-4e6c-bc9b-3f7202914fca" />
+
+
 
 ## Программирование.
 
