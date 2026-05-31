@@ -39,7 +39,12 @@
 Приложите скриншоты.
 
 #### Скрины
-todo
+<img width="1112" height="410" alt="Снимок экрана 2026-05-31 173113" src="https://github.com/user-attachments/assets/574ebfae-25b8-442a-bfa8-fa4d7987a2f3" />
+<img width="1157" height="640" alt="Снимок экрана 2026-05-31 173320" src="https://github.com/user-attachments/assets/fb0f4264-e393-456b-bd23-0f744651b8fe" />
+<img width="1163" height="632" alt="Снимок экрана 2026-05-31 173337" src="https://github.com/user-attachments/assets/22d70e92-bc71-406e-b074-5beada556813" />
+<img width="800" height="270" alt="Снимок экрана 2026-05-31 173403" src="https://github.com/user-attachments/assets/6b5ae67b-9bc1-443d-8a24-c5cbb0c9afff" />
+
+Последняя картинка показывает что файлы действительно появились
 
 ### FTP клиент (3 балла)
 Создайте консольное приложение FTP клиента для работы с файлами по FTP. Приложение может
